@@ -21,9 +21,18 @@
 //  }
 //
 
+function retrieveDatapoints(start, end) {
+
+}
+
 //Funktion plotGraph(start, end)
 //   daten := retrieveDatapoints(start, end)
 //   setupGraph(start, end)
 //   für datenpunkt in daten {
 //      plotData(datenpunkt.datum, datenpunkt.wert)
-//   }
+//}
+
+
+function plotGraph(start, end) {
+
+}
