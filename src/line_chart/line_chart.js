@@ -1,3 +1,32 @@
+(async function() {
+  const data = [
+    { month: 'Jan', bmi: 34.5 },
+    { month: 'Feb', bmi: 32.5 },
+    { month: 'Mar', bmi: 31.8 },
+    { month: 'Apr', bmi: 28.7 },
+    { month: 'May', bmi: 24.5 },
+    { month: 'Jun', bmi: 22.2 },
+    { month: 'Jul', bmi: 21.2 },
+  ];
+
+  new Chart(
+    document.getElementById('bmi-chart'),
+    {
+      type: 'line',
+      data: {
+        labels: data.map(row => row.month),
+        datasets: [
+          {
+            label: 'BMI over time',
+            data: data.map(row => row.bmi)
+          }
+        ]
+      }
+    }
+  );
+})()
+
+
 //Userstory: Der Nutzer möchte seinen BMI-Wert für den Zeitraum November-Dezember visualisieren,
 //           hierzu wählt er im Dashboard als Start November und Dezember als ende. Als nächstes
 //           drückt er den "aktualisieren" Knopf, woraufhin die Daten vom HTTP Server abgerufen werden.
@@ -21,9 +50,13 @@
 //  }
 //
 
-function retrieveDatapoints(start, end) {
+/*const config = {
+    type: 'line',
+}*/
 
-}
+/*function retrieveDatapoints(start, end) {
+
+}*/
 
 //Funktion plotGraph(start, end)
 //   daten := retrieveDatapoints(start, end)
@@ -33,6 +66,9 @@ function retrieveDatapoints(start, end) {
 //}
 
 
-function plotGraph(start, end) {
-
-}
+/*function plotGraph(start, end) {
+    new Chart(ctx, {
+        type: 'line',
+        
+    })
+}*/
