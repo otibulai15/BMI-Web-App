@@ -1,0 +1,10 @@
+{
+tables: {
+  filters: {
+    options: [
+    "day","month","year"
+    ]
+  }
+}
+  
+}
