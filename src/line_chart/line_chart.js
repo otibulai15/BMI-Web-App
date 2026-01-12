@@ -55,6 +55,5 @@ loadJson('data_mock.json', (err, jsonData) => {
     console.error('Failed to load BMI data:', err);
     return;
   }
-  console.log(jsonData);
   plotChart('bmi-chart', jsonData);
 });
