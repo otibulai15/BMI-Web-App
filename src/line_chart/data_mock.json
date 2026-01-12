@@ -1,11 +1,11 @@
 {
-  "bmiTrend": [
-    { "date": "2026-00-01", "averageBmi": 27.5 },
-    { "date": "2026-15-01", "averageBmi": 27.4 },
-    { "date": "2026-21-01", "averageBmi": 27.3 },
-    { "date": "2026-28-01", "averageBmi": 27.1 },
-    { "date": "2026-01-02", "averageBmi": 27.1 },
-    { "date": "2026-15-02", "averageBmi": 26.9 },
-    { "date": "2026-21-02", "averageBmi": 26.7 }
+  "data": [
+    { "date": "2026-00-01", "bmi_value": 27.5 },
+    { "date": "2026-15-01", "bmi_value": 27.4 },
+    { "date": "2026-21-01", "bmi_value": 27.3 },
+    { "date": "2026-28-01", "bmi_value": 27.1 },
+    { "date": "2026-01-02", "bmi_value": 27.1 },
+    { "date": "2026-15-02", "bmi_value": 26.9 },
+    { "date": "2026-21-02", "bmi_value": 26.7 }
   ]
 }
