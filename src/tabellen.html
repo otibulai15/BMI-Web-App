@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>BMI-Messungen</h1>
+
+  <!-- Filter & Sortierung -->
+  <div class="controls">
+    <select id="filterSelect">
+      <option value="all">Alle Einträge</option>
+      <option value="week">Letzte Woche</option>
+      <option value="month">Letzter Monat</option>
+    </select>
+
+    <select id="sortSelect">
+      <option value="date-desc">Datum absteigend</option>
+      <option value="date-asc">Datum aufsteigend</option>
+      <option value="bmi-asc">BMI aufsteigend</option>
+      <option value="bmi-desc">BMI absteigend</option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Gewicht (kg)</th>
+        <th>Größe (cm)</th>
+        <th>BMI</th>
+        <th>Bewertung</th>
+        <th>Aktion</th>
+      </tr>
+    </thead>
+    <tbody id="bmiTableBody">
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
