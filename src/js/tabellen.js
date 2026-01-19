@@ -1,49 +1,95 @@
-// 1. Darstellung der Tabelle
+let bmiList = [];
 
-// Die App zeigt eine Liste aller gespeicherten BMI-Messungen an.
-// Jede Messung wird als eine Zeile dargestellt, bestehend aus:
-// Datum
-// Gewicht
-// Größe
-// berechneter BMI
-// Bewertung (z. B. „Normalgewicht“)
+const filterSelect = document.getElementById('filterSelect');
+const sortSelect = document.getElementById('sortSelect');
+const tableBody = document.getElementById('bmiTableBody');
 
+// JSON laden
+fetch('../data/mock.json')
+  .then(res => res.json())
+  .then(data => {
+    bmiList = data.tables.bmiEntries;
+    buildTable();
+  })
+  .catch(err => console.error('Fehler beim Laden der JSON:', err));
 
-// Die Tabelle wird dynamisch erzeugt, abhängig von Filter- oder Sortiereinstellungen.
-// 2. Filterbereich
-// Vor der Tabelle gibt es zwei Auswahlfelder:
-// Ein Filter, mit dem der Nutzer den Zeitraum eingrenzen kann:
-// „Alle Einträge“
-// „Letzte Woche“
-// „Letzter Monat“
-// Ein Sortierfeld, mit dem der Nutzer die Reihenfolge bestimmt:
-// Datum aufsteigend
-// Datum absteigend
-// BMI aufsteigend
-// BMI absteigend
-// Wenn der Nutzer eine Auswahl verändert, wird die Tabelle neu aufgebaut.
+// Events
+filterSelect.addEventListener('change', buildTable);
+sortSelect.addEventListener('change', buildTable);
 
-// 3. Ablauf beim Aktualisieren der Tabelle
-// Die App liest den aktuellen Sortierwert.
-// Die App liest den aktuellen Filterwert.
-// Die App nimmt die gesamte BMI-Liste und filtert sie:
-// Wenn „Alle“ ausgewählt ist → keine Filterung
-// Wenn „Letzte Woche“ → nur Einträge, die maximal 7 Tage alt sind
-// Wenn „Letzter Monat“ → nur Einträge der letzten 30 Tage
-// Nach der Filterung sortiert die App die verbleibenden Einträge:
-// nach Datum oder BMI
-// jeweils auf- oder absteigend
-// Die Tabelle wird geleert.
-// Für jeden gefilterten Sortiereintrag wird eine neue Zeile erzeugt.
+// BMI Berechung
+// Weight number
+// height number
+function calculateBMI(weight, height) {
+  const h = height / 100;
+  return (weight / (h * h)).toFixed(1);
+}
 
-// 4. Löschen von Einträgen
-// Wenn der Nutzer in einer Zeile auf „Löschen“ klickt:
-// Der Eintrag wird aus der BMI-Liste entfernt.
-// Die Tabelle wird sofort erneut aufgebaut.
-// Die Sortier- und Filtereinstellungen bleiben dabei erhalten.
+// BMI bewerten
+function bmiRating(bmi) {
+  if (bmi < 18.5) return 'Untergewicht';
+  if (bmi < 25) return 'Normalgewicht';
+  if (bmi < 30) return 'Übergewicht';
+  return 'Adipositas';
+}
 
-// 5. Verhalten beim Start der Seite
-// Beim Laden der App:
-// Die gespeicherte BMI-Liste wird geladen.
-// Die Standardwerte für Filter (Alle) und Sortierung (Datum absteigend) werden gesetzt.
-// Die Tabelle wird einmal initial aufgebaut.
+// Tabelle neu aufbauen
+function buildTable() {
+  let list = [...bmiList];
+  const now = new Date();
+
+  // Filtern
+  if (filterSelect.value !== 'all') {
+    list = list.filter(entry => {
+      const entryDate = new Date(entry.date);
+      const diffDays = (now - entryDate) / (1000 * 60 * 60 * 24);
+      if (filterSelect.value === 'week') return diffDays <= 7;
+      if (filterSelect.value === 'month') return diffDays <= 30;
+    });
+  }
+
+  // Sortieren
+  switch (sortSelect.value) {
+    case 'date-asc':
+      list.sort((a, b) => new Date(a.date) - new Date(b.date));
+      break;
+    case 'date-desc':
+      list.sort((a, b) => new Date(b.date) - new Date(a.date));
+      break;
+    case 'bmi-asc':
+      list.sort((a, b) =>
+        calculateBMI(a.weight, a.height) - calculateBMI(b.weight, b.height)
+      );
+      break;
+    case 'bmi-desc':
+      list.sort((a, b) =>
+        calculateBMI(b.weight, b.height) - calculateBMI(a.weight, a.height)
+      );
+      break;
+  }
+
+  // Tabelle leeren
+  tableBody.innerHTML = '';
+
+  // Zeilen erzeugen
+  list.forEach((entry, index) => {
+    const bmi = calculateBMI(entry.weight, entry.height);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${entry.date}</td>
+      <td>${entry.weight}</td>
+      <td>${entry.height}</td>
+      <td>${bmi}</td>
+      <td>${bmiRating(bmi)}</td>
+      <td><button onclick="deleteEntry(${index})">Löschen</button></td>
+    `;
+    tableBody.appendChild(tr);
+  });
+}
+
+// Löschen
+function deleteEntry(index) {
+  bmiList.splice(index, 1);
+  buildTable();
+}
