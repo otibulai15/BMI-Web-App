@@ -1,36 +1,48 @@
+<!-- src/dashboard/dashboard.html -->
+
 <div class="row g-3">
     <div class="col-12">
-        <div class="box page-title">Dashboard (page title)</div>
+        <div class="box page-title">Dashboard</div>
     </div>
 
-    <div class="col-12 col-md-4">
-        <div class="box p-3">
-            <div class="ph ph-chart">Chart Placeholder</div>
-        </div>
-    </div>
-    <div class="col-12 col-md-4">
-        <div class="box p-3">
-            <div class="ph ph-chart">Chart Placeholder</div>
-        </div>
-    </div>
-    <div class="col-12 col-md-4">
-        <div class="box p-3">
-            <div class="ph ph-chart">Chart Placeholder</div>
+    <!-- Top row: 2 charts -->
+    <div class="col-12 col-lg-6">
+        <div class="box-chart p-3">
+            <div class="embed-title">Bar Chart</div>
+
+            <!-- Bar chart: fixed path (already works) -->
+
+            <iframe id="dashBarFrame" class="dash-frame" src="./barchart/barchart.html" title="Bar chart"
+                loading="lazy"></iframe>
+
         </div>
     </div>
 
-    <div class="col-12 col-lg-8">
-        <div class="box">
-            <div class="box-header">Tables</div>
-            <div class="p-3">
-                <div class="ph ph-table">Quick Table Overview of the last 10 entries</div>
+    <div class="col-12 col-lg-6">
+        <div class="box-chart p-3">
+            <div class="embed-title">Line Chart</div>
+
+            <!-- Line chart: src will be set by dashboard.js (auto-detect) -->
+            <div class="embed-box embed-box--small">
+                <iframe id="dashLineFrame" class="dash-frame" src="./line_chart/line_chart.html" title="Line chart"
+                    loading="lazy"></iframe>
+
+                <!-- Simple inline fallback (shown if no file is found) -->
+                <div id="dashLineFallback" class="embed-fallback d-none">
+                    Line chart file not found (check folder name/path)
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-lg-4">
-        <div class="box p-3">
-            <div class="ph ph-bars">Bar Chart Placeholder</div>
+    <!-- Bottom: reserve everything for tables -->
+    <div class="col-12">
+        <div class="box">
+            <div class="box-header">Tables</div>
+
+            <iframe class="table-frame" id="tableFrame" src="./tables/tables.html" title="Line chart"
+                loading="lazy"></iframe>
+
         </div>
     </div>
 </div>
