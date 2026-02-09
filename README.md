@@ -10,4 +10,4 @@ Here you can find the links to the features in this software.
 - [Linechart](./docs/Linechart.md) 
 - [Tables](./docs/Tables.md) 
 - [Settings](./docs/Settings.md) 
-- [Input Form](./docs/InputForm.md) 
+- [Formular](./docs/Formular.md)
