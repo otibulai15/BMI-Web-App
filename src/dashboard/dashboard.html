@@ -5,16 +5,13 @@
         <div class="box page-title">Dashboard</div>
     </div>
 
-    <!-- Top row: 2 charts -->
     <div class="col-12 col-lg-6">
         <div class="box-chart p-3">
             <div class="embed-title">Bar Chart</div>
 
-            <!-- Bar chart: fixed path (already works) -->
-
-            <iframe id="dashBarFrame" class="dash-frame" src="./barchart/barchart.html" title="Bar chart"
+            <!-- IMPORTANT: barchart/ is in src/, not in dashboard/ -->
+            <iframe id="dashBarFrame" class="dash-frame" src="../barchart/barchart.html" title="Bar chart"
                 loading="lazy"></iframe>
-
         </div>
     </div>
 
@@ -22,12 +19,11 @@
         <div class="box-chart p-3">
             <div class="embed-title">Line Chart</div>
 
-            <!-- Line chart: src will be set by dashboard.js (auto-detect) -->
             <div class="embed-box embed-box--small">
-                <iframe id="dashLineFrame" class="dash-frame" src="./line_chart/line_chart.html" title="Line chart"
+                <!-- IMPORTANT: line_chart/ is in src/, not in dashboard/ -->
+                <iframe id="dashLineFrame" class="dash-frame" src="../line_chart/line_chart.html" title="Line chart"
                     loading="lazy"></iframe>
 
-                <!-- Simple inline fallback (shown if no file is found) -->
                 <div id="dashLineFallback" class="embed-fallback d-none">
                     Line chart file not found (check folder name/path)
                 </div>
@@ -35,14 +31,13 @@
         </div>
     </div>
 
-    <!-- Bottom: reserve everything for tables -->
     <div class="col-12">
         <div class="box">
             <div class="box-header">Tables</div>
 
-            <iframe class="table-frame" id="tableFrame" src="./tables/tables.html" title="Line chart"
+            <!-- IMPORTANT: tables/ is in src/, not in dashboard/ -->
+            <iframe class="table-frame" id="tableFrame" src="../tables/tables.html" title="Tables"
                 loading="lazy"></iframe>
-
         </div>
     </div>
 </div>
